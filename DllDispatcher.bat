@@ -1,1 +1,1 @@
-"c:\Program Files\Python36\python.exe" %~dp0\DllDispatcher.py %*
+python %~dp0\DllDispatcher.py %*
