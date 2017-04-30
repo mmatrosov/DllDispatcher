@@ -5,7 +5,8 @@ DllDispatcher is the tool that allows to associate different applications with d
 # Installation
 
 1. Install python. The tool was tested with python v3.6.1
-2. Clone or download the repository
-3. Set proper path to python executable in `DllDispatcher.bat`
-4. Set proper path to associated applications in `DllDispatcher.py`
-5. Associate dll files with `DllDispatcher.bat`
+2. Install `pywin32` package
+3. Clone or download the repository
+4. Set proper path to python executable in `DllDispatcher.bat`
+5. Set proper path to associated applications in `DllDispatcher.py`
+6. Associate dll files with `DllDispatcher.bat`
