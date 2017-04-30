@@ -1,12 +1,11 @@
+import configparser
+import os
 import sys
 import subprocess
 import struct
 import time
 import win32gui
 import win32process
-
-win32_app = 'c:/Program Files (x86)/depends22_x86/depends.exe'
-win64_app = 'c:/Program Files/depends22_x64/depends.exe'
 
 IMAGE_FILE_MACHINE_I386 = 332
 IMAGE_FILE_MACHINE_IA64 = 512
@@ -57,8 +56,11 @@ def get_hwnds_for_pid(pid):
     return hwnds
 
 
+config = configparser.ConfigParser()
+config.read(os.path.splitext(sys.argv[0])[0] + '.ini')
+
 file_path = sys.argv[1]
-app = win64_app if is_64bit_pe(file_path) else win32_app
+app = config['Common']['Win64App'] if is_64bit_pe(file_path) else config['Common']['Win32App']
 
 print("Starting {}...".format(app))
 args = [app, file_path]
@@ -66,6 +68,6 @@ proc = subprocess.Popen(args)
 
 print("Started process {}, waiting for window to appear...".format(proc.pid))
 while not get_hwnds_for_pid(proc.pid):
-    time.sleep(0.5)
+    time.sleep(float(config['Common']['WindowDetectionPeriodSeconds']))
 
 print("See the window, my job is done!")
