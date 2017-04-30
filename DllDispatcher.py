@@ -59,11 +59,11 @@ def get_hwnds_for_pid(pid):
 config = configparser.ConfigParser()
 config.read(os.path.splitext(sys.argv[0])[0] + '.ini')
 
-file_path = sys.argv[1]
-app = config['Common']['Win64App'] if is_64bit_pe(file_path) else config['Common']['Win32App']
+dll_path = sys.argv[1]
+app = config['Common']['Win64App'] if is_64bit_pe(dll_path) else config['Common']['Win32App']
 
 print("Starting {}...".format(app))
-args = [app, file_path]
+args = [app, dll_path]
 proc = subprocess.Popen(args)
 
 print("Started process {}, waiting for window to appear...".format(proc.pid))
